@@ -1,8 +1,5 @@
-
-### `delete.md`
-
 ```markdown
-# Delete the Book Instance
+# Delete Operation
 
 ## Command
 ```python
