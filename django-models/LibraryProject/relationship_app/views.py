@@ -27,14 +27,17 @@ def is_librarian(user):
 def is_member(user):
     return user.userprofile.role == 'Member'
 
+# Admin View
 @user_passes_test(is_admin)
 def admin_view(request):
-    return HttpResponse("This is the Admin view")
+    return render(request, 'relationship_app/admin_view.html')
 
+# Librarian View
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return HttpResponse("This is the Librarian view")
+    return render(request, 'relationship_app/librarian_view.html')
 
+# Member View
 @user_passes_test(is_member)
 def member_view(request):
-    return HttpResponse("This is the Member view")
+    return render(request, 'relationship_app/member_view.html')
