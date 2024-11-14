@@ -5,18 +5,19 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_models.settings")
 django.setup()
 
-# Import models after setting up Django
 from relationship_app.models import Author, Book, Library, Librarian
 
 # Define the functions
 
-# Query all books by a specific author using filter
+# Query all books by a specific author using get and filter
 def get_books_by_author(author_name):
-    authors = Author.objects.filter(name=author_name)
-    if authors.exists():
-        books = Book.objects.filter(author__in=authors)  # Filter books by the found authors
+    try:
+        # Retrieve the author instance
+        author = Author.objects.get(name=author_name)
+        # Filter books by the retrieved author
+        books = Book.objects.filter(author=author)
         return books
-    else:
+    except Author.DoesNotExist:
         return f"No author found with name {author_name}"
 
 # List all books in a library
