@@ -117,3 +117,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEBUG = False
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+import os
+
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-secret-key')
+ALLOWED_HOSTS = ['yourdomain.com', 'anotherdomain.com']
+
+MIDDLEWARE = [
+    'django.middleware.csrf.CsrfViewMiddleware',
+    # Other middleware...
+]
+

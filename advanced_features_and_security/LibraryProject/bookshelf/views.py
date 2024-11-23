@@ -76,3 +76,29 @@ def delete_book(request, pk):
         return redirect('view_books')
     return render(request, 'bookshelf/book_confirm_delete.html', {'book': book})
 
+
+def search_books(request):
+    query = request.GET.get('q')
+    if query:
+        books = Book.objects.filter(title__icontains=query)
+    else:
+        books = Book.objects.all()
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'author', 'published_date']
+
+# bookshelf/views.py
+from .forms import BookForm
+
+def create_book(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
+    else:
+        form = BookForm()
+    return render(request, 'bookshelf/form_example.html', {'form': form})
