@@ -4,3 +4,10 @@
     <input type="text" name="book_name">
     <button type="submit">Submit</button>
 </form>
+
+<h2>Create a New Book</h2>
+<form method="POST" action="{% url 'create_book' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
