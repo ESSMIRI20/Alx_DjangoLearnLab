@@ -12,24 +12,16 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-w$#upoi*rn424spi3sbm@p&5^s5elyd)%k5%beivn9xtk$03nf'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
-# Application definition
-
+AUTH_USER_MODEL = 'bookshelf.CustomUser' 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
