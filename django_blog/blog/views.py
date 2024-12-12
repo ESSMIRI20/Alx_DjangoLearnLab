@@ -1,7 +1,14 @@
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required  # Add this line
+from .forms import CustomUserCreationForm, ProfileUpdateForm, UserUpdateForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
+
+
 
 # List all blog posts
 class PostListView(ListView):
