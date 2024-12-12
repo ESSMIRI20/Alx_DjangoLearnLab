@@ -1,3 +1,19 @@
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
-<small>Written by {{ post.author }} on {{ post.date_posted }}</small>
+<h2>Comments</h2>
+{% for comment in post.comments.all %}
+    <div>
+        <strong>{{ comment.author }}</strong> said:
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.created_at }}</small>
+        {% if comment.author == user %}
+            <a href="{% url 'edit_comment' comment.id %}">Edit</a> |
+            <a href="{% url 'delete_comment' comment.id %}">Delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<h3>Leave a Comment</h3>
+<form method="post" action="{% url 'add_comment' post.id %}">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Submit</button>
+</form>
