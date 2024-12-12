@@ -14,3 +14,16 @@ urlpatterns = [
     path('comments/<int:pk>/update/', views.CommentUpdateView.as_view(), name='update_comment'),  # Corrected for updating comments
     path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete_comment'),  # Corrected for deleting comments
 ]
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # Other URLs...
+
+    # Search URL
+    path('search/', views.search, name='search'),
+
+    # Tag-based filtering
+    path('tags/<str:tag_name>/', views.posts_by_tag, name='posts_by_tag'),
+]

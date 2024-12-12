@@ -17,3 +17,7 @@
     {{ comment_form.as_p }}
     <button type="submit">Submit</button>
 </form>
+
+{% for tag in post.tags.all %}
+    <a href="{% url 'posts_by_tag' tag.name %}">{{ tag.name }}</a>
+{% endfor %}
