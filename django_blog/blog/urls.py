@@ -2,12 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # User Authentication URLs
-    path('register/', views.register, name='register'),
-    path('login/', views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', views.LogoutView.as_view(template_name='logged_out.html'), name='logout'),
-    path('profile/', views.profile, name='profile'),
-
     # Post CRUD URLs
     path('posts/', views.PostListView.as_view(), name='post_list'),
     path('posts/<int:pk>/', views.PostDetailView.as_view(), name='post_detail'),
