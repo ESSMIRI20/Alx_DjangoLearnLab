@@ -10,7 +10,7 @@ urlpatterns = [
     path('posts/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
 
     # Comment CRUD URLs
-    path('posts/<int:post_id>/comments/new/', views.CommentCreateView.as_view(), name='add_comment'),
-    path('comments/<int:pk>/update/', views.CommentUpdateView.as_view(), name='update_comment'),
-    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete_comment'),
+    path('posts/<int:post_id>/comments/new/', views.CommentCreateView.as_view(), name='add_comment'),  # Corrected for creating comments
+    path('comments/<int:pk>/update/', views.CommentUpdateView.as_view(), name='update_comment'),  # Corrected for updating comments
+    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete_comment'),  # Corrected for deleting comments
 ]
