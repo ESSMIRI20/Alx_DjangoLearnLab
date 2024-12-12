@@ -78,3 +78,17 @@ def posts_by_tag(request, tag_name):
     tag = Tag.objects.get(name=tag_name)
     posts = tag.posts.all()
     return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag})
+
+from django.views.generic import ListView
+from .models import Post
+from taggit.models import Tag
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_list_by_tag.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        tag = Tag.objects.get(slug=tag_slug)  # Fetch the tag based on the slug
+        return Post.objects.filter(tags=tag)  # Filter posts by the selected tag
