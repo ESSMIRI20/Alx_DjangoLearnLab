@@ -3,10 +3,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Post
 from accounts.models import CustomUser  # Or User, depending on your model name
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated  # Import the permission
+from rest_framework import status
 
 @api_view(['GET'])
 def user_feed(request):
+    # Ensure the user is authenticated
+    if not request.user.is_authenticated:
+        return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
+
     # Get all users that the current user is following
     following_users = request.user.following.all()
     
