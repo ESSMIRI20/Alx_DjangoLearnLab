@@ -1,7 +1,6 @@
-# accounts/views.py
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
-from .models import CustomUser  # Make sure you're importing the correct model
+from .models import CustomUser  # Make sure you're importing the correct custom user model
 from .serializers import RegisterSerializer
 
 # RegisterView remains as is
@@ -27,7 +26,7 @@ class FollowUserView(generics.GenericAPIView):
 
     def post(self, request, user_id):
         try:
-            user_to_follow = CustomUser.objects.get(id=user_id)  # Use CustomUser here
+            user_to_follow = CustomUser.objects.get(id=user_id)  # Use CustomUser here instead of User
         except CustomUser.DoesNotExist:
             return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -46,7 +45,7 @@ class UnfollowUserView(generics.GenericAPIView):
 
     def post(self, request, user_id):
         try:
-            user_to_unfollow = CustomUser.objects.get(id=user_id)  # Use CustomUser here
+            user_to_unfollow = CustomUser.objects.get(id=user_id)  # Use CustomUser here instead of User
         except CustomUser.DoesNotExist:
             return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
