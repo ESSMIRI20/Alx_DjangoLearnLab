@@ -21,3 +21,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    # Add custom fields or methods here
+    pass
