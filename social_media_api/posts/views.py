@@ -29,3 +29,31 @@ def user_feed(request):
         })
 
     return Response(post_data)
+
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import Post, Like
+from notifications.models import Notification
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def like_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    if created:
+        # Create a notification
+        Notification.objects.create(
+            recipient=post.user,
+            actor=request.user,
+            verb="liked your post",
+            target=post,
+        )
+        return JsonResponse({'status': 'liked'})
+    return JsonResponse({'status': 'already liked'})
+
+@login_required
+def unlike_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    Like.objects.filter(user=request.user, post=post).delete()
+    return JsonResponse({'status': 'unliked'})
